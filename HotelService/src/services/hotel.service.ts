@@ -3,6 +3,7 @@ import {
   createHotel,
   getAllHotel,
   getHotelById,
+  softDeleteHotel,
   updateHotelById,
 } from "../repositories/hotel.repository";
 import { BadRequestError } from "../utils/errors/app.error";
@@ -39,4 +40,9 @@ export async function updateHotelServiceById(
 ) {
   const hotel = await updateHotelById(id, hotelData);
   return hotel;
+}
+
+export async function softDeleteHotelService(id: number) {
+  const response = await softDeleteHotel(id);
+  return response;
 }

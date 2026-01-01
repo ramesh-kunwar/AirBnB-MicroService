@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createHotelHandler,
+  deleteHotelHandler,
   getAllHotelHandler,
   getHotelByIdHandler,
   updateHotelHandler,
@@ -14,5 +15,6 @@ hotelRouter.get("/", getAllHotelHandler);
 
 hotelRouter.get("/:id", getHotelByIdHandler);
 hotelRouter.patch("/:id", updateHotelHandler);
+hotelRouter.delete("/:id", deleteHotelHandler);
 
 export default hotelRouter;

@@ -3,6 +3,7 @@ import {
   createHotelService,
   getAllHotelService,
   getHotelByIdService,
+  softDeleteHotelService,
   updateHotelServiceById,
 } from "../services/hotel.service";
 import { StatusCodes } from "http-status-codes";
@@ -62,6 +63,20 @@ export const updateHotelHandler = async (
   res.status(StatusCodes.OK).json({
     message: `Hotel with id ${hotelReponse.id} updated successfully`,
     data: hotelReponse,
+    success: true,
+  });
+};
+
+export const deleteHotelHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  await softDeleteHotelService(Number(req.params.id));
+
+  res.status(StatusCodes.OK).json({
+    message: `Hotel with id ${req.params.id} deleted successfully`,
+
     success: true,
   });
 };

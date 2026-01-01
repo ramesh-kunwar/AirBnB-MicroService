@@ -18,7 +18,11 @@ export async function createHotel(hotelData: createHotelDTO) {
 }
 
 export async function getAllHotel() {
-  const hotel = await Hotel.findAll();
+  const hotel = await Hotel.findAll({
+    where: {
+      deletedAt: null,
+    },
+  });
 
   return hotel;
 }
@@ -51,4 +55,23 @@ export async function updateHotelById(id: number, hotelData: UpdateHotelDTO) {
   logger.info(`Hotel with id ${hotel.id} updated successfully`);
 
   return hotel;
+}
+
+export async function softDeleteHotel(id: number) {
+  //   const hotel = await Hotel.findByPk(id);
+  const hotel = await Hotel.findByPk(id);
+
+  if (!hotel) {
+    logger.error(`Hotel not found : ${id}`);
+
+    throw new NotFoundError(`Hotel with id ${id} not found`);
+  }
+
+  hotel.deletedAt = new Date();
+
+  await hotel.save();
+
+  logger.info(`Hotel with id ${hotel.id} updated successfully`);
+
+  return true;
 }
