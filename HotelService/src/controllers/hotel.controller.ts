@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import {
   createHotelService,
+  getAllHotelService,
   getHotelByIdService,
 } from "../services/hotel.service";
 
@@ -29,5 +30,29 @@ export const getHotelByIdHandler = async (
     message: `Hotel fetched successfully`,
     data: hotelResponse,
     success: true,
+  });
+};
+
+export const getAllHotelHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const hotelResponse = await getAllHotelService();
+
+  res.status(501).json({
+    message: `All hotels fetched successfully`,
+    data: hotelResponse,
+    success: true,
+  });
+};
+
+export const updateHotelHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  res.status(501).json({
+    message: "not implemented",
   });
 };

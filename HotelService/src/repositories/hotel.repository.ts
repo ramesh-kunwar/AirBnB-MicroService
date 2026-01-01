@@ -28,3 +28,9 @@ export async function getHotelById(id: number) {
 
   return hotel;
 }
+
+export async function getAllHotel() {
+  const hotel = await Hotel.findAll();
+
+  return hotel;
+}
