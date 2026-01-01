@@ -6,13 +6,13 @@ import v2Router from "./routers/v2/index.router";
 import { genericErrorHandler } from "./middlewares/error.middleware";
 import logger from "./config/logger";
 import { attachCorrelationIdMiddleware } from "./middlewares/correlation.middleware";
+import sequelize from "./db/models/sequelize";
 
 const app = express();
 
 app.use(express.json());
 
-
-app.use(attachCorrelationIdMiddleware)
+app.use(attachCorrelationIdMiddleware);
 
 app.use("/api/v1", v1Router);
 app.use("/api/v2", v2Router);
@@ -20,8 +20,15 @@ app.use("/api/v2", v2Router);
 // error handler
 app.use(genericErrorHandler);
 
-app.listen(serverConfig.PORT, () => {
-  console.log(`Server is running at port ${serverConfig.PORT}.`);
-  // console.log(`Press ctrl + c to stop the server.`);
-  logger.info(`Press ctrl + c to stop the server  `, { name: "dev server" });
+app.listen(serverConfig.PORT, async () => {
+  try {
+    console.log(`Server is running at port ${serverConfig.PORT}.`);
+    // console.log(`Press ctrl + c to stop the server.`);
+    logger.info(`Press ctrl + c to stop the server  `, { name: "dev server" });
+
+    await sequelize.authenticate(); // test the connection to the database
+    logger.info("Database connection has been established successfully");
+  } catch (error) {
+    console.log("Something went wrong in the db queries");
+  }
 });
