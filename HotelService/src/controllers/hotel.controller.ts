@@ -3,6 +3,7 @@ import {
   createHotelService,
   getAllHotelService,
   getHotelByIdService,
+  updateHotelServiceById,
 } from "../services/hotel.service";
 
 export const createHotelHandler = async (
@@ -52,7 +53,14 @@ export const updateHotelHandler = async (
   res: Response,
   next: NextFunction
 ) => {
+  const hotelReponse = await updateHotelServiceById(
+    Number(req.params.id),
+    req.body
+  );
+
   res.status(501).json({
-    message: "not implemented",
+    message: `Hotel with id ${hotelReponse.id} updated successfully`,
+    data: hotelReponse,
+    success: true,
   });
 };

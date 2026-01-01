@@ -1,8 +1,9 @@
-import { createHotelDTO } from "../dto/hotel.dto";
+import { createHotelDTO, UpdateHotelDTO } from "../dto/hotel.dto";
 import {
   createHotel,
   getAllHotel,
   getHotelById,
+  updateHotelById,
 } from "../repositories/hotel.repository";
 import { BadRequestError } from "../utils/errors/app.error";
 
@@ -22,12 +23,20 @@ export async function createHotelService(hotelData: createHotelDTO) {
   return hotel;
 }
 
+export async function getAllHotelService() {
+  const hotel = await getAllHotel();
+  return hotel;
+}
+
 export async function getHotelByIdService(id: number) {
   const hotel = await getHotelById(id);
   return hotel;
 }
 
-export async function getAllHotelService() {
-  const hotel = await getAllHotel();
+export async function updateHotelServiceById(
+  id: number,
+  hotelData: UpdateHotelDTO
+) {
+  const hotel = await updateHotelById(id, hotelData);
   return hotel;
 }
