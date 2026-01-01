@@ -16,8 +16,8 @@ class Hotel extends Model<
   declare location: string;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
-  declare rating: number;
-  declare ratingCount: number;
+  declare rating?: number;
+  declare ratingCount?: number;
 }
 
 Hotel.init(
@@ -51,10 +51,12 @@ Hotel.init(
     rating: {
       type: "FLOAT",
       defaultValue: null,
+      allowNull: true,
     },
     ratingCount: {
       type: "INTEGER",
       defaultValue: null,
+      allowNull: true,
     },
   },
   {
