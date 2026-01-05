@@ -1,14 +1,14 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
   "include": [ // directories that will be included during compilation
-    "src/**/*"
-   ],
+    "src/**/*",
+    "generated/prisma/**/*",
+    "prisma/client.ts"   ],
   "exclude": [ // directories that will be exclude during compilation
     "node_modules"
   ],
   "compilerOptions": {
     // File Layout
-    "rootDir": "./src",
     "outDir": "./dist",
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
