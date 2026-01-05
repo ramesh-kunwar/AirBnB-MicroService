@@ -1,0 +1,27 @@
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: airbnb-sql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root # Strong root password
+      MYSQL_DATABASE: airbnb_db # Default database
+      MYSQL_USER: airbnb_user # Non-root user
+      MYSQL_PASSWORD: user123! # Password for non-root user
+      MYSQL_ROOT_HOST: "%" # Allow root access from any host
+    ports:
+      - "3306:3306" # Map container port to host
+    volumes:
+      - airbnb-sql-volume:/var/lib/mysql
+    networks:
+      - airbnb-network
+    restart: "no" # Disable restart during dev to see errors
+
+volumes:
+  airbnb-sql-volume:
+    name: airbnb-sql-volume
+    driver: local
+
+networks:
+  airbnb-network:
+    driver: bridge
+    name: airbnb-network
