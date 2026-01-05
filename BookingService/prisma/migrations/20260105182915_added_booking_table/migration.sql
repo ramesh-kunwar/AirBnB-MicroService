@@ -6,7 +6,8 @@ CREATE TABLE `Booking` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
     `bookingAmount` INTEGER NOT NULL,
-    `bookingStatus` ENUM('PENDING', 'CONFIRMED', 'CANCELLED') NOT NULL,
+    `status` ENUM('PENDING', 'CONFIRMED', 'CANCELLED') NOT NULL,
+    `totalGuests` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
