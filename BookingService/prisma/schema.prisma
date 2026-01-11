@@ -22,10 +22,11 @@ model Booking {
 
 model IdempotencyKey {
   id        Int       @id @default(autoincrement())
-  key       Int       @unique // going to contain booking id
+  key       String    @unique // going to contain booking id
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   bookings  Booking[]
+  finalized Boolean   @default(false)
 }
 
 enum BookingStatus {
